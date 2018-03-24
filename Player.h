@@ -9,11 +9,9 @@ public:
 	Player(float xp, float yp);
 	~Player() = default;
 	sf::RectangleShape rect;
-	void hitting();
 	sf::Vector2f getPosition();///nowa funkcja zeby wiedziec skad strza³a ma leciec
-
 	int playerHP;
 private:
-	
+	sf::Texture myplayertexture;
 	void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 };
