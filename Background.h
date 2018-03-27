@@ -13,7 +13,9 @@ public:
 	Background(sf::Vector2u myWinSize);
 	~Background() = default;
 	void displayGraphics(sf::RenderWindow& myWindow, std::vector<Player> players, Arrow liveArrow, std::vector<DeadArrow> deadarrows);
+	void displayBackground(sf::RenderWindow& myWindow);
 private:
+	int licznik;
 	sf::Texture forestTexture;
 	sf::Texture skyTexture;
 	sf::Texture grassTexture;
