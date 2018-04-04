@@ -5,14 +5,15 @@
 #include "Player.h"
 #include "Arrow.h"
 #include "DeadArrow.h"
+#include "Wind.h"
 
 class Background //: public sf::Drawable
 {
 public:
-	Background() = delete;
-	Background(sf::Vector2u myWinSize);
+	Background() = default;
+	Background(sf::RenderWindow& myWindow);
 	~Background() = default;
-	void displayGraphics(sf::RenderWindow& myWindow, std::vector<Player> players, Arrow liveArrow, std::vector<DeadArrow> deadarrows);
+	void displayGraphics(sf::RenderWindow& myWindow, std::vector<Player> players, Arrow& liveArrow, std::vector<DeadArrow> deadarrows);
 	void displayBackground(sf::RenderWindow& myWindow);
 private:
 	int licznik;

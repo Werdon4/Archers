@@ -5,7 +5,7 @@ class Player : public sf::Drawable
 {
 public:
 
-	Player() = delete;
+	Player() = default;
 	Player(float xp, float yp);
 	~Player() = default;
 	sf::RectangleShape rect;

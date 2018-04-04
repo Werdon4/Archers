@@ -2,7 +2,7 @@
 
 
 
-Background::Background(sf::Vector2u myWinSize)
+Background::Background(sf::RenderWindow& myWindow)
 {
 	licznik = 0;
 	if (!forestTexture.loadFromFile("forest.jpg"))
@@ -12,40 +12,40 @@ Background::Background(sf::Vector2u myWinSize)
 	if (!grassTexture.loadFromFile("grass.jpg"))
 		std::cout << "Blad trawa!" << std::endl;
 
-	for (int i = 0; i < 13; i++,licznik++)
+	for (int i = 0; i < 13; i++, licznik++)
 	{
 		tabSprite.push_back(mySprite);
 		tabSprite[licznik].setTexture(forestTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWinSize.x) + i * float(myWinSize.x), 0);
+		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), 0);
 	}
 	for (int i = 0; i < 13; i++, licznik++)
 	{
 		tabSprite.push_back(mySprite);
 		tabSprite[licznik].setTexture(skyTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWinSize.x) + i * float(myWinSize.x), -float(myWinSize.y));
+		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), -float(myWindow.getSize().y));
 	}
 	for (int i = 0; i < 13; i++, licznik++)
 	{
 		tabSprite.push_back(mySprite);
 		tabSprite[licznik].setTexture(skyTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWinSize.x) + i * float(myWinSize.x), -2*float(myWinSize.y));
+		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), -2 * float(myWindow.getSize().y));
 	}
 	for (int i = 0; i < 13; i++, licznik++)
 	{
 		tabSprite.push_back(mySprite);
 		tabSprite[licznik].setTexture(grassTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWinSize.x) + i * float(myWinSize.x), float(myWinSize.y));
+		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), float(myWindow.getSize().y));
 	}
 }
 
 /*void Background::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	for (int i = 0; i < 15; i++) {
-		target.draw(tabSprite[i]);
-	}
+for (int i = 0; i < 15; i++) {
+target.draw(tabSprite[i]);
+}
 }*/
 
-void Background::displayGraphics(sf::RenderWindow& myWindow, std::vector<Player> players, Arrow liveArrow, std::vector<DeadArrow> deadarrows)
+void Background::displayGraphics(sf::RenderWindow& myWindow, std::vector<Player> players, Arrow& liveArrow, std::vector<DeadArrow> deadarrows)
 {
 	for (int i = 0; i < 52; i++) {
 		myWindow.draw(tabSprite[i]);
