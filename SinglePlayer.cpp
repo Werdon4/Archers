@@ -194,6 +194,15 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 		lines[0].position = sf::Vector2f(aim1.x, aim1.y);
 		lines[1].position = sf::Vector2f(aimNow.x, aimNow.y);
 		myCamera.update(view1, players, kolejnosc, myWindow);
+		//////////////wind update
+		myWind->update();
+		wordOfWind = "X= ";
+		wordOfWind.append(std::to_string(myWind->v2iwind.x));
+		wordOfWind.append(" Y= ");
+		wordOfWind.append(std::to_string(myWind->v2iwind.y));
+		hpTexts[2].setString(wordOfWind);
+
+
 		///////////////////////////////////////////////////////////////////////////////////Window Render
 		myWindow.clear();
 		myBackground.displayGraphics(myWindow, players, liveArrow, deadarrows);
