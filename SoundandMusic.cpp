@@ -66,3 +66,7 @@ void SoundandMusic::musicPlay() {
 		notmyMusic.play();
 	}
 }
+
+void SoundandMusic::musicStop() {	
+		notmyMusic.stop();
+}

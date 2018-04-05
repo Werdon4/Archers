@@ -202,7 +202,6 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 		wordOfWind.append(std::to_string(myWind->v2iwind.y));
 		hpTexts[2].setString(wordOfWind);
 
-
 		///////////////////////////////////////////////////////////////////////////////////Window Render
 		myWindow.clear();
 		myBackground.displayGraphics(myWindow, players, liveArrow, deadarrows);
@@ -217,8 +216,15 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 		myWindow.draw(hpTexts[0]);
 		myWindow.draw(hpTexts[1]);
 		//myWindow.draw(hpTexts[3]);
-		myWindow.draw(hpTexts[2]);
+		if (myWind->myuseWind) {
+			myWindow.draw(hpTexts[2]);
+		}
+		//myWindow.draw(hpTexts[2]);
 		myWindow.display();
 	}
 	return;
+}
+
+SinglePlayer::~SinglePlayer() {
+	mySounds->musicStop();
 }

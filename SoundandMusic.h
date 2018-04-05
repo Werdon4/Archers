@@ -19,6 +19,8 @@ public:
 	void hitUpdate();
 	void painUpdate();
 	void musicPlay();
+
+	void musicStop();
 private:
 	bool myuseSound;
 	bool bodyHit=0;

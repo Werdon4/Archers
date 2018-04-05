@@ -21,7 +21,8 @@ public:
 	//friend class SoundandMusic;
 	SinglePlayer() = delete;
 	SinglePlayer(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera & myCamera);
-	~SinglePlayer() = default;
+	//~SinglePlayer() = default;
+	~SinglePlayer();
 	void Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera & myCamera);
 private:
 

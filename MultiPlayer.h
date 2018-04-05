@@ -20,7 +20,8 @@ public:
 	//friend class SoundandMusic;
 	MultiPlayer() = delete;
 	MultiPlayer(sf::RenderWindow& myWindow,DataOfOptions & doo,Camera & myCamera);
-	~MultiPlayer() = default;
+	//~MultiPlayer() = default;
+	~MultiPlayer();
 	void Run(sf::RenderWindow& myWindow,DataOfOptions & doo,Camera & myCamera);
 private:
 

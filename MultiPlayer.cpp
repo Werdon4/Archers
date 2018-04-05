@@ -147,15 +147,19 @@ void MultiPlayer::Run(sf::RenderWindow& myWindow,DataOfOptions & doo, Camera & m
 		lines[0].position = sf::Vector2f(aim1.x, aim1.y);
 		lines[1].position = sf::Vector2f(aimNow.x, aimNow.y);
 		myCamera.update(view1, players, kolejnosc, myWindow);
-		myWind->update(kolejnosc, gracz1.getPosition(),gracz2.getPosition());
-		//wordOfWind.append("X= ");
-		wordOfWind = "X= ";
-		wordOfWind.append(std::to_string(myWind->v2iwind.x));
-		wordOfWind.append(" Y= ");
-		wordOfWind.append(std::to_string(myWind->v2iwind.y));
-		hpTexts[2].setString(wordOfWind);
-		//hpTexts[2].setPosition(windPosition.x, windPosition.y);
-		hpTexts[2].setPosition(myWind->windsprite.getPosition());
+
+		if (myWind->myuseWind) {
+			myWind->update(kolejnosc, gracz1.getPosition(), gracz2.getPosition());
+			//wordOfWind.append("X= ");
+			wordOfWind = "X= ";
+			wordOfWind.append(std::to_string(myWind->v2iwind.x));
+			wordOfWind.append(" Y= ");
+			wordOfWind.append(std::to_string(myWind->v2iwind.y));
+			hpTexts[2].setString(wordOfWind);
+			//hpTexts[2].setPosition(windPosition.x, windPosition.y);
+			hpTexts[2].setPosition(myWind->windsprite.getPosition());
+		}
+
 		///////////////////////////////////////////////////////////////////////////////////Window Render
 		myWindow.clear();
 		myBackground.displayGraphics(myWindow, players, liveArrow, deadarrows);
@@ -170,8 +174,14 @@ void MultiPlayer::Run(sf::RenderWindow& myWindow,DataOfOptions & doo, Camera & m
 		myWindow.draw(hpTexts[0]);
 		myWindow.draw(hpTexts[1]);
 		//myWindow.draw(hpTexts[3]);
-		myWindow.draw(hpTexts[2]);
+		if (myWind->myuseWind) {
+			myWindow.draw(hpTexts[2]);
+		}
 		myWindow.display();
 	}
 	return;
+}
+
+MultiPlayer::~MultiPlayer() {
+	mySounds->musicStop();
 }
