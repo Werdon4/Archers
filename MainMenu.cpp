@@ -61,8 +61,12 @@ Menu* MainMenu::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu* wsk
 	switch (event.type)
 	{
 	case sf::Event::Closed:
+	{
 		myWindow.close();
+		//myWindow.setView(sf::View(sf::Vector2f(0, 0), sf::Vector2f(1920, 1080)));
 		break;
+	}
+		
 	case sf::Event::KeyPressed:
 		switch (event.key.code)
 		{
@@ -82,6 +86,7 @@ Menu* MainMenu::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu* wsk
 				SinglePlayer* SP = new SinglePlayer(myWindow, doo, myCamera);
 				SP->Run(myWindow, doo, myCamera);
 				delete SP;
+				myWindow.setView(sf::View(sf::Vector2f(960, 540), sf::Vector2f(1920, 1080)));
 				break;
 			}
 			case 1:
@@ -93,6 +98,7 @@ Menu* MainMenu::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu* wsk
 				//Camera*  myCamera= new Camera();
 				MP->Run(myWindow,doo,myCamera);
 				delete MP;
+				myWindow.setView(sf::View(sf::Vector2f(960, 540), sf::Vector2f(1920, 1080)));
 				break;
 			}
 			case 2:
