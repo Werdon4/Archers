@@ -11,7 +11,7 @@ void DataOfOptions::changeWind() {
 	else {
 		useWind = 1;
 	}
-	std::cout << "Wiatr zostal kurwa zmieniony\n";
+	std::cout << "Wiatr zostal zmieniony\n";
 }
 
 void DataOfOptions::changeMusic() {
@@ -19,7 +19,7 @@ void DataOfOptions::changeMusic() {
 		useMusic = 0;
 	}
 	else {
-		useWind = 1;
+		useMusic = 1;
 	}
 	std::cout << "Muzyka zostala zmieniona\n";
 }
