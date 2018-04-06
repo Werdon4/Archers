@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include<time.h>
 
 class Bot
 {
@@ -20,7 +21,7 @@ public:
 private:
 	bool isItFirst = 1;
 	bool isItSecond = 0;
-	bool cheetWindOff = 1;
+	bool cheetWindOff = 0;
 	bool goodAim = 0;
 	int step=100;		// tzw. NIECO
 	int xPosition;	//przekazywana w konstruktorze pozycja gracza

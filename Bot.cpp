@@ -8,8 +8,9 @@ Bot::Bot(int playerPosition) {
 
 void Bot::aim() {
 	if (isItFirst) {
-		prev.x = 652;		// tutaj tak sam jak ponizej	UWAGA chwilowo w Arrow cpp ograniczenie jest do winsize*0.3 wynosi 652.8
-		prev.y = 367;		//wartosc startowa bedzie ustalana od rng UWAGA w y jest to 367.2 *z tymi parametrami komputer strzela z maksymaln¹ sila luku
+		srand(time(NULL));
+		prev.x = rand()%652;		// tutaj tak sam jak ponizej	UWAGA chwilowo w Arrow cpp ograniczenie jest do winsize*0.3 wynosi 652.8
+		prev.y = rand()%367;		//wartosc startowa bedzie ustalana od rng UWAGA w y jest to 367.2 *z tymi parametrami komputer strzela z maksymaln¹ sila luku
 		shoot.x = prev.x;
 		shoot.y = prev.y;
 		isItFirst = 0;

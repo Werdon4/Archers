@@ -60,7 +60,7 @@ void Options::MoveUp()
 
 void Options::MoveDown()
 {
-	if (selectedItemIndex + 1 < NUMBER_OF_OPTIONS_ITEMS)
+	if (selectedItemIndex + 1 < NUMBER_OF_OPTIONS_ITEMS-2)
 	{
 		optionsTexts[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex++;
