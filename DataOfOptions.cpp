@@ -2,7 +2,8 @@
 DataOfOptions::DataOfOptions() {
 	useWind = 1;
 	useMusic = 1;
-	dificultyLevel = 1;
+	dificultyLevelPlus = 1.5;
+	dificultyLevelMinus = 0.5;
 }
 
 void DataOfOptions::changeWind() {
@@ -25,12 +26,17 @@ void DataOfOptions::changeMusic() {
 	std::cout << "Muzyka zostala zmieniona\n";
 }
 
-void DataOfOptions::changeDificultyLevel(float level)
+void DataOfOptions::changeDificultyLevel(float levelPlus,float levelMinus)
 {
-	dificultyLevel = level;
+	dificultyLevelPlus = levelPlus;
+	dificultyLevelMinus = levelMinus;
 }
 
-float DataOfOptions::getDificultyLevel()
+float DataOfOptions::getDificultyLevelPlus()
 {
-	return dificultyLevel;
+	return dificultyLevelPlus;
+}
+
+float DataOfOptions::getDificultyLevelMinus() {
+	return dificultyLevelMinus;
 }

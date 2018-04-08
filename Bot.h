@@ -8,14 +8,14 @@ class Bot
 public:
 	friend class SinglePlayer;
 	//bot() = delete;
-	Bot(int playerPosition);
+	Bot(int playerPosition, float dificultyLevelPlus,float difficultyLevelMinus);
 	//Bot(void);
 	~Bot() {
 		std::cout << "Bot konczy dzialanie\n";
 	};
 	//void update(sf::Vector2u winSize, sf::View& view1, sf::Clock myClock, Wind myWind);
 	//bool isEnabled;
-	void aim(float dificultyLevel);
+	void aim();
 	sf::Vector2i shoot;
 	bool waiting = 1;
 private:
@@ -24,6 +24,8 @@ private:
 	bool cheetWindOff = 0;
 	bool goodAim = 0;
 	int step = 100;		// tzw. NIECO
+	float multPlus;
+	float multMinus;
 	int xPosition;	//przekazywana w konstruktorze pozycja gracza
 	int xLastArrow;
 

@@ -1,12 +1,14 @@
 #include"Bot.h"
 
-Bot::Bot(int playerPosition) {
+Bot::Bot(int playerPosition,float dificultyLevelPlus,float dificultyLevelMinus) {
 	//shoot.x = 1000;
 	//shoot.y = 100;
+	multPlus = dificultyLevelPlus;
+	multMinus = dificultyLevelMinus;
 	xPosition = playerPosition;
 }
 
-void Bot::aim(float dificultyLevel) {
+void Bot::aim() {
 	if (isItFirst) {
 		srand(time(NULL));
 		prev.x = rand() % 652;		// tutaj tak sam jak ponizej	UWAGA chwilowo w Arrow cpp ograniczenie jest do winsize*0.3 wynosi 652.8
@@ -26,12 +28,12 @@ void Bot::aim(float dificultyLevel) {
 				xPrev = xLastArrow;
 				//xPrev= getArrow x to przy niszczeniu strzly
 				if (xPrev < xPosition) {	//strzala jest za graczem
-					next.x = prev.x - step*dificultyLevel;
-					next.y = prev.y - step*dificultyLevel;
+					next.x = prev.x - step;
+					next.y = prev.y - step;
 				}
 				else {	//strzala jest przed graczem
-					next.x = prev.x + step*dificultyLevel;
-					next.y = prev.y + step*dificultyLevel;
+					next.x = prev.x + step;
+					next.y = prev.y + step;
 				}
 				shoot.x = next.x;
 				shoot.y = next.y;
@@ -40,7 +42,7 @@ void Bot::aim(float dificultyLevel) {
 			else {	//tutaj powinnismy miec juz dwa oddane strzaly prev i next
 				xNext = xLastArrow;
 				if (xPrev < xPosition && xNext < xPosition) {	//oba sa po lewej od gracza
-					step *= 1.5*dificultyLevel;
+					step *= multPlus;//tu bylo 1.5
 					prev.x = next.x;
 					prev.y = next.y;
 					xPrev = xNext;
@@ -51,7 +53,7 @@ void Bot::aim(float dificultyLevel) {
 				}
 				else {
 					if (xPrev<xPosition && xNext > xPosition) {	// sytuacja   prev Player next
-						step *= 0.5*dificultyLevel;
+						step *= multMinus;//tu bylo 0.5
 						prev.x = next.x;
 						prev.y = next.y;
 						xPrev = xNext;
@@ -62,7 +64,7 @@ void Bot::aim(float dificultyLevel) {
 					}
 					else {
 						if (xPrev > xPosition && xNext > xPosition) {	// sytuacja Player prev next
-							step *= 1.5*dificultyLevel;
+							step *= multPlus;
 							prev.x = next.x;
 							prev.y = next.y;
 							xPrev = xNext;
@@ -73,7 +75,7 @@ void Bot::aim(float dificultyLevel) {
 						}
 						else {
 							if (xPrev > xPosition && xNext < xPosition) {	// sytuacja next Player prev
-								step *= 0.5*dificultyLevel;
+								step *= multMinus;
 								prev.x = next.x;
 								prev.y = next.y;
 								xPrev = xNext;

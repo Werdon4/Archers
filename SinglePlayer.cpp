@@ -16,7 +16,7 @@ SinglePlayer::SinglePlayer(sf::RenderWindow& myWindow, DataOfOptions & doo, Came
 	myWind = new Wind(windPosition, doo);
 	mySounds = new SoundandMusic(myClock, doo);
 
-	myBot = new Bot(gracz1.getPosition().x);
+	myBot = new Bot(gracz1.getPosition().x, doo.getDificultyLevelPlus(),doo.getDificultyLevelMinus());
 
 	//myBackground=Background(myWindow.getSize());
 	//myCamera = new Camera;
@@ -133,7 +133,7 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 					myWind->myuseWind = 0;
 				}
 
-				myBot->aim(doo.getDificultyLevel());
+				myBot->aim();
 				aimNow = myBot->shoot;
 				//arrows.push_back(Arrow(aim1, aimNow, gracz2.getPosition(), winSize, myClock));
 				liveArrow = Arrow(aim1, aimNow, gracz2.getPosition(), myWindow, myClock);
@@ -152,6 +152,7 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 				gracz1.playerHP--;
 				if (gracz1.playerHP < 10) {
 					gameOver(myWindow, myBackground, false);
+					return;
 				}
 				myBot->goodAim = 1;
 				mySounds->painUpdate();
