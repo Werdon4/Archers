@@ -22,3 +22,4 @@ sf::Vector2f Player::getPosition()
 	return rect.getPosition();
 }
 
+
