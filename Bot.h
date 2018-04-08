@@ -7,33 +7,26 @@ class Bot
 {
 public:
 	friend class SinglePlayer;
-	//bot() = delete;
-	Bot(int playerPosition, float dificultyLevelPlus,float difficultyLevelMinus);
-	//Bot(void);
-	~Bot() {
-		std::cout << "Bot konczy dzialanie\n";
-	};
-	//void update(sf::Vector2u winSize, sf::View& view1, sf::Clock myClock, Wind myWind);
-	//bool isEnabled;
+	Bot(int playerPosition, float dificultyLevelPlus, float difficultyLevelMinus);
+	~Bot() = default;
 	void aim();
+private:
 	sf::Vector2i shoot;
 	bool waiting = 1;
-private:
 	bool isItFirst = 1;
 	bool isItSecond = 0;
-	bool cheetWindOff = 0;
-	bool goodAim = 0;
-	int step = 100;		// tzw. NIECO
-	float multPlus;
-	float multMinus;
-	int xPosition;	//przekazywana w konstruktorze pozycja gracza
-	int xLastArrow;
+	bool cheetWindOff = 0; //czy wiatr dziala na strzaly bota
+	bool goodAim = 0;   // informuje bota czy trafil
+	int step = 100;		// domyslna wartosc zmieniania sily strzalu bota po nietrafionym strzale
+	//mnozniki dla poziomow trudnosci
+	float multPlus;     //1.1 dla latwego, 1.5 dla normalnego, 2.0 dla trudnego
+	float multMinus;    // 0.9 dla latwego, 0.5 dla normalnego, 0.4 dla trudnego
 
-	sf::Vector2i prev;			//poprzedni strzal
-	bool locationPrev;			//lokalizacja strzalu      ( x  Player) 0   (Player x) 1
-	int xPrev;
+	int xPosition;	    //przekazywana w konstruktorze pozycja gracza
+	int xLastArrow;     // pozycja ostatniej strzaly
 
-	sf::Vector2i next;			//kolejny strzal
-								//bool locationNext;			//lokalizacja strzalu   (x Player) 0   (Player x) 1
-	int xNext;
+	sf::Vector2i prev;  //poprzedni strzal-sila
+	int xPrev;          //lokalizacja poprzedniego strzalu
+	sf::Vector2i next;  //kolejny strzal-sila
+	int xNext;			//lokalizacja aktualnego strzalu
 };

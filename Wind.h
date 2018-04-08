@@ -5,20 +5,18 @@
 #include "DataOfOptions.h"
 #include<time.h>
 #include "Player.h"
-//#include "Camera.h"
+
 class Wind : public sf::Drawable {
 public:
-	//friend class Arrow;
 	friend class MultiPlayer;
 	friend class SinglePlayer;
-	friend class GameMode;
 	bool myuseWind=1;
 	Wind() = delete;
 	Wind(sf::Vector2f position,DataOfOptions & doo);
 
 	~Wind() = default;
 	sf::Vector2i v2iwind;
-	void update(int kolejnosc,sf::Vector2f position1,sf::Vector2f position2);
+	void update(int sequence,sf::Vector2f position1,sf::Vector2f position2);
 	void update();
 private:
 	sf::Clock windClock;

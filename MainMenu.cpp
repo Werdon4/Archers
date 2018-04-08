@@ -56,7 +56,7 @@ void MainMenu::MoveDown()
 	}
 }
 
-void MainMenu::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& wskPresent, Menu*&wskAlternative, GameMode*&ptrGameMode, DataOfOptions & doo, Camera & myCamera)
+void MainMenu::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& ptrPresent, Menu*&ptrAlternative, GameMode*&ptrGameMode, DataOfOptions & doo, Camera & myCamera)
 {
 	Menu* wskTemporary;//wskaznik pomocniczy do zamiany wartosci Present i Alter ze soba
 	switch (event.type)
@@ -101,9 +101,9 @@ void MainMenu::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& wsk
 			case 2:
 			{
 				std::cout << "Ustawienia" << std::endl;
-				wskTemporary = wskPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
-				wskPresent = wskAlternative;
-				wskAlternative = wskTemporary;
+				wskTemporary = ptrPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
+				ptrPresent = ptrAlternative;
+				ptrAlternative = wskTemporary;
 				break;
 			}
 			case 3:

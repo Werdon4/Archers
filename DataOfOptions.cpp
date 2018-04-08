@@ -26,7 +26,7 @@ void DataOfOptions::changeMusic() {
 	std::cout << "Muzyka zostala zmieniona\n";
 }
 
-void DataOfOptions::changeDificultyLevel(float levelPlus,float levelMinus)
+void DataOfOptions::changeDificultyLevel(float levelPlus, float levelMinus)
 {
 	dificultyLevelPlus = levelPlus;
 	dificultyLevelMinus = levelMinus;

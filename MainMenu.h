@@ -14,7 +14,7 @@ public:
 	MainMenu() = delete;
 	MainMenu(sf::RenderWindow& myWindow);
 	~MainMenu() = default;
-	void Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& wskPresent, Menu*&wskAlternative, GameMode*&ptrGameMode, DataOfOptions & doo, Camera & myCamera) override;
+	void Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& ptrPresent, Menu*&ptrAlternative, GameMode*&ptrGameMode, DataOfOptions & doo, Camera & myCamera) override;
 	void MoveUp();
 	void MoveDown();
 	void Display(sf::RenderWindow& myWindow);

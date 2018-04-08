@@ -39,10 +39,8 @@ Wind::Wind(sf::Vector2f position, DataOfOptions & doo) {
 		}
 		if (v2iwind.x < 0)
 			windsprite.rotate(180);
-		//windsprite.setRotation(windsprite.getRotation());
 		windsprite.setOrigin(8, 68);
 	}
-
 }
 
 void Wind::draw(sf::RenderTarget& target, sf::RenderStates state) const
@@ -50,24 +48,22 @@ void Wind::draw(sf::RenderTarget& target, sf::RenderStates state) const
 	if (myuseWind) { target.draw(this->windsprite, state); }
 }
 
-void Wind::update(int kolejnosc, sf::Vector2f position1,sf::Vector2f position2)
+void Wind::update(int sequence, sf::Vector2f position1,sf::Vector2f position2)
 {
 	if (myuseWind) {
-		if (kolejnosc==0) {
+		if (sequence==0) {
 			position1.x += 150;
 			position1.y -= 150;
 			windsprite.setPosition(position1);
 		}
-		if (kolejnosc == 1) {
+		if (sequence == 1) {
 			position2.x += 150;
 			position2.y -= 150;
 			windsprite.setPosition(position2);
 		}
-		//windsprite.setPosition();
 		windTime1 = windClock.getElapsedTime();
 		if (windTime1.asSeconds() >= 2 + oldTime.asSeconds()) {	//co ile ma sie odswiezac wiatr
 			///////////////////////////////
-
 			if (1/*rand() % 2*/) {// zmien wiatr lub niezmien
 				if (moveX == 0) {
 					moveX = 7; //rand() % 5;
@@ -112,7 +108,6 @@ void Wind::update(int kolejnosc, sf::Vector2f position1,sf::Vector2f position2)
 				v2iwind.x = windX;
 				v2iwind.y = windY;
 			}
-
 			///////////////////////////////
 			oldTime = windTime1;
 		}
@@ -131,8 +126,6 @@ void Wind::update(int kolejnosc, sf::Vector2f position1,sf::Vector2f position2)
 
 		windsprite.setTexture(windtexture);
 	}
-	///windtexture.loadFromFile("Arrow.png");
-	//windsprite.setTexture(windtexture);
 }
 
 void Wind::update()
@@ -205,6 +198,4 @@ void Wind::update()
 
 		windsprite.setTexture(windtexture);
 	}
-	///windtexture.loadFromFile("Arrow.png");
-	//windsprite.setTexture(windtexture);
 }

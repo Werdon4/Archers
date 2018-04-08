@@ -7,7 +7,7 @@
 #include "DeadArrow.h"
 #include "Wind.h"
 
-class Background //: public sf::Drawable
+class Background
 {
 public:
 	Background() = default;
@@ -16,12 +16,11 @@ public:
 	void displayGraphics(sf::RenderWindow& myWindow, std::vector<Player> players, Arrow& liveArrow, std::vector<DeadArrow> deadarrows);
 	void displayBackground(sf::RenderWindow& myWindow);
 private:
-	int licznik;
+	int spriteTabIterator;
 	sf::Texture forestTexture;
 	sf::Texture skyTexture;
 	sf::Texture grassTexture;
 	sf::Sprite mySprite;
 	std::vector <sf::Sprite> tabSprite;
-	//void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

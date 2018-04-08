@@ -4,7 +4,7 @@
 
 Background::Background(sf::RenderWindow& myWindow)
 {
-	licznik = 0;
+	spriteTabIterator = 0;
 	if (!forestTexture.loadFromFile("forest.jpg"))
 		std::cout << "Blad las!" << std::endl;
 	if (!skyTexture.loadFromFile("sky.jpg"))
@@ -12,29 +12,29 @@ Background::Background(sf::RenderWindow& myWindow)
 	if (!grassTexture.loadFromFile("grass.jpg"))
 		std::cout << "Blad trawa!" << std::endl;
 
-	for (int i = 0; i < 13; i++, licznik++)
+	for (int i = 0; i < 13; i++, spriteTabIterator++)
 	{
 		tabSprite.push_back(mySprite);
-		tabSprite[licznik].setTexture(forestTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), 0);
+		tabSprite[spriteTabIterator].setTexture(forestTexture);
+		tabSprite[spriteTabIterator].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), 0);
 	}
-	for (int i = 0; i < 13; i++, licznik++)
+	for (int i = 0; i < 13; i++, spriteTabIterator++)
 	{
 		tabSprite.push_back(mySprite);
-		tabSprite[licznik].setTexture(skyTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), -float(myWindow.getSize().y));
+		tabSprite[spriteTabIterator].setTexture(skyTexture);
+		tabSprite[spriteTabIterator].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), -float(myWindow.getSize().y));
 	}
-	for (int i = 0; i < 13; i++, licznik++)
+	for (int i = 0; i < 13; i++, spriteTabIterator++)
 	{
 		tabSprite.push_back(mySprite);
-		tabSprite[licznik].setTexture(skyTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), -2 * float(myWindow.getSize().y));
+		tabSprite[spriteTabIterator].setTexture(skyTexture);
+		tabSprite[spriteTabIterator].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), -2 * float(myWindow.getSize().y));
 	}
-	for (int i = 0; i < 13; i++, licznik++)
+	for (int i = 0; i < 13; i++, spriteTabIterator++)
 	{
 		tabSprite.push_back(mySprite);
-		tabSprite[licznik].setTexture(grassTexture);
-		tabSprite[licznik].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), float(myWindow.getSize().y));
+		tabSprite[spriteTabIterator].setTexture(grassTexture);
+		tabSprite[spriteTabIterator].setPosition(-6 * float(myWindow.getSize().x) + i * float(myWindow.getSize().x), float(myWindow.getSize().y));
 	}
 }
 

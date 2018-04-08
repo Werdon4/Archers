@@ -7,10 +7,8 @@
 #include "DeadArrow.h"
 #include "Background.h"
 #include "Camera.h"
-//#include "Wind.h"
 #include <string>
 #include "SoundandMusic.h"
-//#include <sstream>
 #include<iostream>
 
 class GameMode
@@ -23,29 +21,23 @@ public:
 	void gameOver(sf::RenderWindow& myWindow, Background myBackground, bool playerOneWins);
 protected:
 	sf::Text endMessageTab[2];
-
 	sf::Font myFont;
-	sf::Text hpTexts[3];
-	//std::ostringstream windStream;
-	std::string wordOfWind;
-
+	sf::Text hpTexts[3];//HP 1 i 2 gracza + wartosci waitru w formie tekstu
+	std::string wordOfWind;//tekst ktory przekazujemy tablicy do wyswietlenia
 	Wind* myWind;
 	SoundandMusic* mySounds;
-	///bot
 	sf::View view1;
-	Player gracz1;
-	Player gracz2;
+	Player player1;
+	Player player2;
 	sf::Clock myClock;
 	sf::Time myTime;
-	///botwaits
 	std::vector<Player> players;
 	Arrow liveArrow;
 	std::vector<DeadArrow> deadarrows;
-	int kolejnosc = 0;
-	int checker = 0;
+	int sequence = 0;
+	bool aimLineChecker = 0;
 	sf::Vector2f windPosition;
-	sf::Vector2i aim1, aimNow;
-	//bool firsttime = 0;
+	sf::Vector2i aimLineBegin, aimLineEnd;
 	bool letShoot = 1;
 };
 

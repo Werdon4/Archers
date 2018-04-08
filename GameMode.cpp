@@ -4,7 +4,6 @@
 
 GameMode::GameMode()
 {
-	std::cout << "oddzfsfxfgsf";
 }
 
 

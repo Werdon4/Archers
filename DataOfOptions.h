@@ -7,7 +7,7 @@ public:
 	DataOfOptions();
 	void changeWind();
 	void changeMusic();
-	void changeDificultyLevel(float levelPlus,float levelMinus);
+	void changeDificultyLevel(float levelPlus, float levelMinus);
 	float getDificultyLevelPlus();
 	float getDificultyLevelMinus();
 private:

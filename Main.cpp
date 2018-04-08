@@ -1,7 +1,6 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <cmath>
 #include "Background.h"
-#include "Minimap.h"
 #include "MainMenu.h"
 #include "Menu.h"
 #include "SinglePlayer.h"
@@ -18,8 +17,8 @@ int main()
 	Background background(window);
 	MainMenu myMenu(window);
 	Options myOptions(window);
-	Menu* wskPresent = &myMenu;//dwa wskazniki ktore sluza do przenoszenia sie miedzy menu gry a opcjami zaczynamy od menu gry wiec wskPresent = myMenu
-	Menu* wskAlternative = &myOptions;
+	Menu* ptrPresent = &myMenu;//dwa wskazniki ktore sluza do przenoszenia sie miedzy menu gry a opcjami zaczynamy od menu gry wiec ptrPresent = myMenu
+	Menu* ptrAlternative = &myOptions;
 	DataOfOptions doo;
 	Camera myCamera;
 
@@ -29,7 +28,7 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{//zmiany w Menu.h MainMenu cpp i h Options cpp i h
-			wskPresent->Listening(event, window, wskPresent, wskAlternative,ptrGameMode, doo, myCamera);//funkcja juz nic nie zwraca bo przyjmuje referencje do wskaznikow, jezli chce sie przejsc do innego menu to wskanziki zamieniaja sie wartosciami
+			ptrPresent->Listening(event, window, ptrPresent, ptrAlternative,ptrGameMode, doo, myCamera);//funkcja juz nic nie zwraca bo przyjmuje referencje do wskaznikow, jezli chce sie przejsc do innego menu to wskanziki zamieniaja sie wartosciami
 		}
 		//////////////////////////////////////////////////////////////Update
 
@@ -38,7 +37,7 @@ int main()
 		window.clear();
 
 		background.displayBackground(window);
-		wskPresent->Display(window);
+		ptrPresent->Display(window);
 
 		window.display();
 	}

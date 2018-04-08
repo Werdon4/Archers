@@ -85,7 +85,7 @@ void Options::MoveDown()
 	}
 }
 
-void Options::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& wskPresent, Menu*&wskAlternative, GameMode*&ptrGameMode, DataOfOptions & doo, Camera & myCamera)
+void Options::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& ptrPresent, Menu*&ptrAlternative, GameMode*&ptrGameMode, DataOfOptions & doo, Camera & myCamera)
 {
 	Menu* wskTemporary; //wskaznik pomocniczy do zamiany wartosci Present i Alter ze soba
 	switch (event.type)
@@ -142,16 +142,21 @@ void Options::Listening(sf::Event event, sf::RenderWindow& myWindow, Menu*& wskP
 					dificultyLevelIndex = 0;
 					optionsTexts[6 + dificultyLevelIndex].setFillColor(sf::Color::Red);
 				}
-				//doo.changeDificultyLevel()  zmiana poziomu trudnosci czyli mnoznika step domyslnie jest na jeden;
+				if (dificultyLevelIndex == 0)
+					doo.changeDificultyLevel(1.1, 0.9);
+				if (dificultyLevelIndex == 1)
+					doo.changeDificultyLevel(1.5, 0.5);
+				if (dificultyLevelIndex == 2)
+					doo.changeDificultyLevel(2.0, 0.4);
 				break;
 			}//dodane graficzne wyswietlenie poziomu trudnosci
 			
 			case 3:
 			{
 				std::cout << "Powrot" << std::endl;
-				wskTemporary = wskPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
-				wskPresent = wskAlternative;
-				wskAlternative = wskTemporary;
+				wskTemporary = ptrPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
+				ptrPresent = ptrAlternative;
+				ptrAlternative = wskTemporary;
 				break;
 			}
 			}

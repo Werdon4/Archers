@@ -1,6 +1,6 @@
-#include"Bot.h"
+﻿#include"Bot.h"
 
-Bot::Bot(int playerPosition,float dificultyLevelPlus,float dificultyLevelMinus) {
+Bot::Bot(int playerPosition, float dificultyLevelPlus, float dificultyLevelMinus) {
 	//shoot.x = 1000;
 	//shoot.y = 100;
 	multPlus = dificultyLevelPlus;
@@ -12,7 +12,7 @@ void Bot::aim() {
 	if (isItFirst) {
 		srand(time(NULL));
 		prev.x = rand() % 652;		// tutaj tak sam jak ponizej	UWAGA chwilowo w Arrow cpp ograniczenie jest do winsize*0.3 wynosi 652.8
-		prev.y = rand() % 367;		//wartosc startowa bedzie ustalana od rng UWAGA w y jest to 367.2 *z tymi parametrami komputer strzela z maksymaln� sila luku
+		prev.y = rand() % 367;		//wartosc startowa bedzie ustalana od rng UWAGA w y jest to 367.2 *z tymi parametrami komputer strzela z maksymaln¹ sila luku
 		shoot.x = prev.x;
 		shoot.y = prev.y;
 		isItFirst = 0;
