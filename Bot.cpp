@@ -99,3 +99,53 @@ void Bot::aim() {
 	}
 
 }
+
+bool Bot::getwaiting()
+{
+	return waiting;
+}
+
+void Bot::setwaiting(bool waiting)
+{
+	this->waiting = waiting;
+}
+
+bool Bot::getgoodAim()
+{
+	return goodAim;
+}
+
+void Bot::setgoodAim(bool goodAim)
+{
+	this->goodAim = goodAim;
+}
+
+bool Bot::getcheetWindOff()
+{
+	return cheetWindOff;
+}
+
+void Bot::setcheetWindOff(bool cheetWindOff)
+{
+	this->cheetWindOff = cheetWindOff;
+}
+
+sf::Vector2i Bot::getshoot()
+{
+	return shoot;
+}
+
+void Bot::setshoot(sf::Vector2i shoot)
+{
+	this->shoot = shoot;
+}
+
+int Bot::getxLastArrow()
+{
+	return xLastArrow;
+}
+
+void Bot::setxLastArrow(int xLastArrow)
+{
+	this->xLastArrow = xLastArrow;
+}

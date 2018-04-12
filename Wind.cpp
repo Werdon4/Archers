@@ -2,7 +2,7 @@
 #include<iostream>
 Wind::Wind(sf::Vector2f position, DataOfOptions & doo) {
 	v2iwind = sf::Vector2i(20, 0);
-	myuseWind = doo.useWind;
+	myuseWind = doo.getuseWind();
 	if (myuseWind) {
 		/////////////////////////////////////// Blok Rng
 		srand(time(NULL));
@@ -198,4 +198,29 @@ void Wind::update()
 
 		windsprite.setTexture(windtexture);
 	}
+}
+
+sf::Sprite Wind::getwindsprite()
+{
+	return windsprite;
+}
+
+bool Wind::getmyuseWind()
+{
+	return myuseWind;
+}
+
+void Wind::setmyuseWind(bool myuseWind)
+{
+	this->myuseWind = myuseWind;
+}
+
+sf::Vector2i Wind::getv2iwind()
+{
+	return v2iwind;
+}
+
+void Wind::setv2iwind(sf::Vector2i v2iwind)
+{
+	this->v2iwind = v2iwind;
 }

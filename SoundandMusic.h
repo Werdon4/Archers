@@ -5,8 +5,6 @@
 #include "DataOfOptions.h"
 class SoundandMusic {
 public:
-	friend class MultiPlayer;
-	friend class SinglePlayer;
 	SoundandMusic() = delete;
 	SoundandMusic(sf::Clock myCLock, DataOfOptions & doo);
 	~SoundandMusic() = default;
@@ -16,6 +14,8 @@ public:
 	void painUpdate();
 	void musicPlay();
 	void musicStop();
+	bool getfirstTime();
+	void setfirstTime(bool firstTime);
 private:
 	bool myuseSound;
 	bool bodyHit=0;

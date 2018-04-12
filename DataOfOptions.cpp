@@ -1,4 +1,20 @@
 #include"DataOfOptions.h"
+bool DataOfOptions::getuseWind()
+{
+	return useWind;
+}
+void DataOfOptions::setuseWind(bool useWind)
+{
+	this->useWind = useWind;
+}
+bool DataOfOptions::getuseMusic()
+{
+	return useMusic;
+}
+void DataOfOptions::setuseMusic(bool useMusic)
+{
+	this->useMusic = useMusic;
+}
 DataOfOptions::DataOfOptions() {
 	useWind = 1;
 	useMusic = 1;

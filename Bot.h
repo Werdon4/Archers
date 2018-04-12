@@ -6,10 +6,24 @@
 class Bot
 {
 public:
-	friend class SinglePlayer;
 	Bot(int playerPosition, float dificultyLevelPlus, float difficultyLevelMinus);
 	~Bot() = default;
 	void aim();
+
+	bool getwaiting();
+	void setwaiting(bool waiting);
+
+	bool getgoodAim();
+	void setgoodAim(bool goodAim);
+
+	bool getcheetWindOff();
+	void setcheetWindOff(bool cheetWindOff);
+
+	sf::Vector2i getshoot();
+	void setshoot(sf::Vector2i shoot);
+
+	int getxLastArrow();
+	void setxLastArrow(int xLastArrow);
 private:
 	sf::Vector2i shoot;
 	bool waiting = 1;

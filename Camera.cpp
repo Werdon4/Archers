@@ -61,3 +61,13 @@ void Camera::update(sf::View & view1, std::vector<Player> & players, int & seque
 void Camera::start() {
 	cameraStart = 1;
 }
+
+bool Camera::getcameraMoveX()
+{
+	return cameraMoveX;;
+}
+
+bool Camera::getcameraMoveY()
+{
+	return cameraMoveY;
+}

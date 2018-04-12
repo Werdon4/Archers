@@ -54,7 +54,7 @@ void Background::displayGraphics(sf::RenderWindow& myWindow, std::vector<Player>
 	{
 		myWindow.draw(players[i]);
 	}
-	if (!liveArrow.isDead) {
+	if (!liveArrow.getisDead()) {
 		myWindow.draw(liveArrow);
 	}
 	for (int i = 0; i < deadarrows.size(); i++) {

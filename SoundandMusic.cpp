@@ -1,7 +1,7 @@
 #include "SoundandMusic.h"
 
 SoundandMusic::SoundandMusic(sf::Clock myClock, DataOfOptions & doo) {
-	myuseSound = doo.useMusic;
+	myuseSound = doo.getuseMusic();
 	if (myuseSound) {
 		//if (!musicBuffer.loadFromFile("title.wav"))
 		//	std::cout << "cos poszlo nie tak\n";
@@ -69,4 +69,14 @@ void SoundandMusic::musicPlay() {
 
 void SoundandMusic::musicStop() {	
 		notmyMusic.stop();
+}
+
+bool SoundandMusic::getfirstTime()
+{
+	return firstTime;
+}
+
+void SoundandMusic::setfirstTime(bool firstTime)
+{
+	this->firstTime = firstTime;
 }

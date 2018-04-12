@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Player : public sf::Drawable
 {
@@ -9,8 +10,14 @@ public:
 	~Player() = default;
 	sf::RectangleShape rect;
 	sf::Vector2f getPosition();
-	int playerHP;
+	int getplayerHP();
+	void setplayerHP(int playerHP);
+	void decreaseHP();
+	void playerFlip();
+	sf::Sprite getmyPlayerSprite();
 private:
-	sf::Texture myplayertexture;
+	int playerHP;
+	sf::Texture* myPlayerTexture=new sf::Texture;
+	sf::Sprite myPlayerSprite;
 	void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 };

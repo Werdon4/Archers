@@ -5,8 +5,8 @@ DeadArrow::DeadArrow(Arrow x)
 		//std::cout << "DEADARROW" << std::endl;
 		myxtexture.setSmooth(true);
 	myxsprite.setTexture(myxtexture);
-	myxsprite.setPosition(sf::Vector2f(x.mysprite.getPosition().x, x.mysprite.getPosition().y));
-	myxsprite.setRotation(x.mysprite.getRotation());
+	myxsprite.setPosition(sf::Vector2f(x.getmysprite().getPosition().x, x.getmysprite().getPosition().y));
+	myxsprite.setRotation(x.getmysprite().getRotation());
 	myxsprite.setOrigin(8, 68);
 }
 

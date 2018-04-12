@@ -15,8 +15,6 @@ Arrow::Arrow(sf::Vector2i mouseP, sf::Vector2i mouse, sf::Vector2f poczatek, sf:
 	isDead = false;
 	float X = (mouseP.x - mouse.x) / (0.34*myWindow.getSize().x);
 	float Y = (mouseP.y - mouse.y) / (0.34*myWindow.getSize().y);
-	//std::cout << "spriteTabIterator x :" << mouseP.x - mouse.x << " mianownik x :" << (0.34*myWindow.getSize().x) << std::endl;
-	//std::cout<< "spriteTabIterator y :"<< mouseP.y - mouse.y<<" mianownik y :"<< (0.34*myWindow.getSize().y) << std::endl;
 	if (X>1)
 		X = 1;
 	if (X<-1)
@@ -46,17 +44,15 @@ void Arrow::update(sf::RenderWindow& myWindow, sf::View& view1, sf::Clock myCloc
 			mysprite.rotate(180);
 
 		mysprite.move(arrowVelocity);
-		//view1.move(arrowVelocity);
 		view1.setCenter(mysprite.getPosition());
 		double gravity = 9.81;
 
-		if (myWind.myuseWind) {
-			arrowVelocity.y = myWind.v2iwind.y + velocityZero.y + gravity * (timeOfRun.asSeconds()); // V= wiatr + v0 - g*t
-			arrowVelocity.x = myWind.v2iwind.x + velocityZero.x; // Vx+ wiatr
+		if (myWind.getmyuseWind()) {
+			arrowVelocity.y = myWind.getv2iwind().y + velocityZero.y + gravity * (timeOfRun.asSeconds()); // V= wiatr + v0 - g*t
+			arrowVelocity.x = myWind.getv2iwind().x + velocityZero.x; // Vx+ wiatr
 		}										 //double gravity = 0.15;
 		else {
 			arrowVelocity.y = velocityZero.y + gravity * (timeOfRun.asSeconds());
-			//arrowVelocity.x = velocityZero.x;
 		}
 	}
 	else {
@@ -68,10 +64,45 @@ void Arrow::update(sf::RenderWindow& myWindow, sf::View& view1, sf::Clock myCloc
 bool Arrow::isInterecting(Player& player)
 {
 
-	if (mysprite.getGlobalBounds().intersects(player.rect.getGlobalBounds()))
+	if (mysprite.getGlobalBounds().intersects(player.getmyPlayerSprite().getGlobalBounds()))
 	{
 		isHit = true;
 		return true;
 	}
 	return false;
+}
+
+bool Arrow::getisHit()
+{
+	return isHit;
+}
+
+void Arrow::setisHit(bool isHit)
+{
+	this->isHit = isHit;
+}
+
+bool Arrow::getisDead()
+{
+	return isDead;
+}
+
+void Arrow::setisDead(bool isDead)
+{
+	this->isDead = isDead;
+}
+
+sf::Vector2f Arrow::getarrowVelocity()
+{
+	return arrowVelocity;
+}
+
+void Arrow::setarroVelocity(sf::Vector2f arrowVelocity)
+{
+	this->arrowVelocity = arrowVelocity;
+}
+
+sf::Sprite Arrow::getmysprite()
+{
+	return mysprite;
 }

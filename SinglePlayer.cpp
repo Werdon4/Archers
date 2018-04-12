@@ -4,9 +4,10 @@ SinglePlayer::SinglePlayer(sf::RenderWindow& myWindow, DataOfOptions & doo, Came
 {
 	endMessageTab[0].setString("Wygrales !!!");
 	endMessageTab[1].setString("Przegrales");
-	liveArrow.isDead = true;
-	player1 = Player(45, myWindow.getSize().y - 400);
-	player2 = Player(myWindow.getSize().x - 45, myWindow.getSize().y - 400);
+	liveArrow.setisDead(true);
+	player1 = Player(45, myWindow.getSize().y - 300);
+	player2 = Player(myWindow.getSize().x - 45, myWindow.getSize().y - 300);
+	player2.playerFlip();
 	windPosition.x = player1.getPosition().x + 150;
 	windPosition.y = player1.getPosition().y - 150;
 	players.push_back(player1);
@@ -25,20 +26,20 @@ SinglePlayer::SinglePlayer(sf::RenderWindow& myWindow, DataOfOptions & doo, Came
 		std::cout << "Font error" << std::endl;
 	}
 	hpTexts[0].setFont(myFont);
-	hpTexts[0].setPosition(player1.getPosition().x, player1.getPosition().y - 140);
+	hpTexts[0].setPosition(player1.getPosition().x, player1.getPosition().y - 200);///140
 	hpTexts[0].setCharacterSize(30);
 	hpTexts[0].setOutlineColor(sf::Color::Black);
 	hpTexts[0].setOutlineThickness(5);
 	hpTexts[0].setFillColor(sf::Color::White);
-	hpTexts[0].setString(std::to_string(player1.playerHP));
+	hpTexts[0].setString(std::to_string(player1.getplayerHP()));
 
 	hpTexts[1].setFont(myFont);
-	hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 140);
+	hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 200);
 	hpTexts[1].setCharacterSize(30);
 	hpTexts[1].setOutlineColor(sf::Color::Black);
 	hpTexts[1].setOutlineThickness(5);
 	hpTexts[1].setFillColor(sf::Color::White);
-	hpTexts[1].setString(std::to_string(player2.playerHP));
+	hpTexts[1].setString(std::to_string(player2.getplayerHP()));
 
 	hpTexts[2].setFont(myFont);
 	hpTexts[2].setPosition(windPosition.x, windPosition.y);
@@ -47,16 +48,14 @@ SinglePlayer::SinglePlayer(sf::RenderWindow& myWindow, DataOfOptions & doo, Came
 	hpTexts[2].setOutlineThickness(5);
 	hpTexts[2].setFillColor(sf::Color::White);
 	wordOfWind.append("X= ");
-	wordOfWind.append(std::to_string(myWind->v2iwind.x));
+	wordOfWind.append(std::to_string(myWind->getv2iwind().x));
 	wordOfWind.append(" Y= ");
-	wordOfWind.append(std::to_string(myWind->v2iwind.y));
+	wordOfWind.append(std::to_string(myWind->getv2iwind().y));
 	hpTexts[2].setString(wordOfWind);
 }
 
 void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera & myCamera)
 {
-	//Camera myCamera;
-	//mySounds->notmyMusic.play(); to zmienilem na to ponizej
 	mySounds->musicPlay();
 	Background myBackground(myWindow);
 	while (myWindow.isOpen())
@@ -65,7 +64,6 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 		sf::Event event;
 		while (myWindow.pollEvent(event))
 		{
-			//myWindow.setView(view1);
 			switch (event.type)
 			{
 			case sf::Event::Closed:
@@ -81,8 +79,7 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 						liveArrow = Arrow(aimLineBegin, aimLineEnd, player1.getPosition(), myWindow, myClock);
 						sequence = 1;
 						letShoot = 0;
-						//firsttime = 1;//////////to zastapic tym ponizej i usunac firsttime z multiplayer
-						mySounds->firstTime = 1;
+						mySounds->setfirstTime(true);
 					}
 				}
 				break;
@@ -99,74 +96,71 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 			}
 		}
 		////////////////////////////////////////////////bot
-		if (sequence == 1 && letShoot == 1 && !myCamera.cameraMoveY && !myCamera.cameraMoveX) {
+		if (sequence == 1 && letShoot == 1 && !myCamera.getcameraMoveY() && !myCamera.getcameraMoveX()) {
 			myTime = myClock.getElapsedTime();
-			if (myBot->waiting) {
+			if (myBot->getwaiting()) {
 				botWaits = myTime;
 				botWaits = botWaits + sf::seconds(2);
-				myBot->waiting = 0;
+				myBot->setwaiting(false);
 				std::cout << "Wszedlem!\n";
 			}
 			if (myTime.asSeconds() >= botWaits.asSeconds()) {
-				myBot->waiting = 1;
+				myBot->setwaiting(true);
 				aimLineBegin = sf::Vector2i(0, 0);
-				if (myBot->cheetWindOff) {	//mozna wylaczyc dzialanie waitru na strzaly bota
-					myWind->myuseWind = 0;
+				if (myBot->getcheetWindOff()) {	//mozna wylaczyc dzialanie waitru na strzaly bota
+					myWind->setmyuseWind(false);
 				}
 				myBot->aim();
-				aimLineEnd = myBot->shoot;
+				aimLineEnd = myBot->getshoot();
 				liveArrow = Arrow(aimLineBegin, aimLineEnd, player2.getPosition(), myWindow, myClock);
 				sequence = 0;
 				letShoot = 0;
-				mySounds->firstTime = 1;
+				mySounds->setfirstTime(true);
 			}
 		}
 		//////////////////////////////////////////////////////////////////////Window update
-		if (!liveArrow.isDead) {
+		if (!liveArrow.getisDead()) {
 			if (sequence == 0 && liveArrow.isInterecting(player1)) {
-				player1.playerHP--;
-				if (player1.playerHP < 10) {
+				player1.decreaseHP();
+				if (player1.getplayerHP() < 1) {
 					gameOver(myWindow, myBackground, false);
 					return;
 				}
-				myBot->goodAim = 1;
+				myBot->setgoodAim(true);
 				mySounds->painUpdate();
 				hpTexts[0].setFillColor(sf::Color::Red);
-				hpTexts[0].setString(std::to_string(player1.playerHP));
+				hpTexts[0].setString(std::to_string(player1.getplayerHP()));
 			}
-			//liveArrow.isInterecting(player2);
 			if (sequence == 1 && liveArrow.isInterecting(player2)) {
-				player2.playerHP--;
-				if (player2.playerHP < 10) {//wywolanie konca gry po 1 hicie bo nie bede tyle czekal :P
+				player2.decreaseHP();
+				if (player2.getplayerHP() < 1) {
 					gameOver(myWindow, myBackground, true);
 					return;
 				}
 				mySounds->painUpdate();
 				hpTexts[1].setFillColor(sf::Color::Red);
-				hpTexts[1].setString(std::to_string(player2.playerHP));
+				hpTexts[1].setString(std::to_string(player2.getplayerHP()));
 			}
 			liveArrow.update(myWindow, view1, myClock, *myWind);
 
 			mySounds->flyingUpdate(myClock);
 
-			if (liveArrow.isHit)
+			if (liveArrow.getisHit())
 			{
-				//to tez mozna zamienic na funkcje aby bardziej oczywiste bylo
-				if (!liveArrow.isDead) {/////isHit ma raz zmienion? wartosc, to przebiega caly czas
+				if (!liveArrow.getisDead()) {
 					deadarrows.push_back(DeadArrow(liveArrow));
-					liveArrow.isDead = true;
+					liveArrow.setisDead(true);
 					if (sequence == 0) {
-						myBot->xLastArrow = liveArrow.mysprite.getPosition().x;	// tego w code blocksie bym nie ogarnal
+						myBot->setxLastArrow(liveArrow.getmysprite().getPosition().x);
 						if (!liveArrow.isInterecting(player1)) {	//to ma zapewnic ze bot sobie poradzi po trafieniu a potem nietrafieniu
-							myBot->goodAim = 0;	//jeszcze nie wiem czy to w ogoole dziala :D
+							myBot->setgoodAim(false);
 						}
 					}
-					letShoot = 1;///// <---- turowe wystarczy usunac tablice strzal jesli sie na to decydujemy
+					letShoot = 1;
 					mySounds->hitUpdate();
-					//myBot->xLastArrow = liveArrow.mysprite.getPosition().x;
 				}
-				if (myBot->cheetWindOff) {	//wlaczam wiatr kiedy tylko chce
-					myWind->myuseWind = 1;
+				if (myBot->getcheetWindOff()) {	//wlaczam wiatr kiedy tylko chce
+					myWind->setmyuseWind(true);
 				}
 				myCamera.start();
 			}
@@ -182,9 +176,9 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 		//////////////////////////////////////////////////wind update
 		myWind->update();
 		wordOfWind = "X= ";
-		wordOfWind.append(std::to_string(myWind->v2iwind.x));
+		wordOfWind.append(std::to_string(myWind->getv2iwind().x));
 		wordOfWind.append(" Y= ");
-		wordOfWind.append(std::to_string(myWind->v2iwind.y));
+		wordOfWind.append(std::to_string(myWind->getv2iwind().y));
 		hpTexts[2].setString(wordOfWind);
 		///////////////////////////////////////////////////////////////////////////////////Window Render
 		myWindow.clear();
@@ -196,7 +190,7 @@ void SinglePlayer::Run(sf::RenderWindow& myWindow, DataOfOptions & doo, Camera &
 		myWindow.draw(*myWind);
 		myWindow.draw(hpTexts[0]);
 		myWindow.draw(hpTexts[1]);
-		if (myWind->myuseWind) {
+		if (myWind->getmyuseWind()) {
 			myWindow.draw(hpTexts[2]);
 		}
 		myWindow.display();
