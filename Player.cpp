@@ -2,7 +2,6 @@
 
 Player::Player(float xp, float yp)
 {
-	//myplayertexture.loadFromFile()
 	rect.setSize(sf::Vector2f(25, 300));
 	rect.setOrigin(sf::Vector2f(6, 40));
 	rect.setPosition(sf::Vector2f(xp, yp));
@@ -21,4 +20,5 @@ sf::Vector2f Player::getPosition()
 {
 	return rect.getPosition();
 }
+
 

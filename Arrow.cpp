@@ -1,23 +1,22 @@
 #include "Arrow.h"
 
-Arrow::Arrow(sf::Vector2i mouseP, sf::Vector2i mouse, sf::Vector2f poczatek, sf::Vector2u winSize)
+Arrow::Arrow(sf::Vector2i mouseP, sf::Vector2i mouse, sf::Vector2f poczatek, sf::RenderWindow& myWindow, sf::Clock myClock)
 {
-	if (mytexture.loadFromFile("Arrow.png"))
-		std::cout << "Udalo sie!" << std::endl;
-	mytexture.setSmooth(true);
-	mysprite.setTexture(mytexture);
-	mysprite.setPosition(sf::Vector2f(poczatek.x, poczatek.y-120));
+	if (mytexture->loadFromFile("Arrow.png"))
+		std::cout << "Constructor strzaly" << std::endl;
+	momentZero = myClock.getElapsedTime();
+	mytexture->setSmooth(true);
+	mysprite.setTexture(*mytexture);
+	mysprite.setPosition(sf::Vector2f(poczatek.x, poczatek.y - 120));
 	//mysprite.setScale(0.67, 0.67);
 	mysprite.setOrigin(8, 68);
-	
-	//rect.setSize(sf::Vector2f(1, 50));
-	//rect.setOrigin(sf::Vector2f(0.5, 25));
-	//rect.setPosition(sf::Vector2f(poczatek.x, poczatek.y));
-	//rect.setFillColor(sf::Color::Red);
 
 	isHit = false;
-	float X = (mouseP.x - mouse.x) / (0.34*winSize.x);
-	float Y = (mouseP.y - mouse.y) / (0.34*winSize.y);
+	isDead = false;
+	float X = (mouseP.x - mouse.x) / (0.34*myWindow.getSize().x);
+	float Y = (mouseP.y - mouse.y) / (0.34*myWindow.getSize().y);
+	//std::cout << "spriteTabIterator x :" << mouseP.x - mouse.x << " mianownik x :" << (0.34*myWindow.getSize().x) << std::endl;
+	//std::cout<< "spriteTabIterator y :"<< mouseP.y - mouse.y<<" mianownik y :"<< (0.34*myWindow.getSize().y) << std::endl;
 	if (X>1)
 		X = 1;
 	if (X<-1)
@@ -26,37 +25,44 @@ Arrow::Arrow(sf::Vector2i mouseP, sf::Vector2i mouse, sf::Vector2f poczatek, sf:
 		Y = 1;
 	if (Y<-1)
 		Y = -1;
-	cst_veloc = sf::Vector2f(10 * X, 8 * Y);
+	arrowVelocity = sf::Vector2f(20 * X, 20 * Y);
+	velocityZero = arrowVelocity;
 }
 
 void Arrow::draw(sf::RenderTarget& target, sf::RenderStates state) const
 {
-	target.draw(this->mysprite, state);
+	target.draw(mysprite);
 }
 
-void Arrow::update(sf::Vector2u winSize,sf::View& view1)
+void Arrow::update(sf::RenderWindow& myWindow, sf::View& view1, sf::Clock myClock, Wind myWind)
 {
-	mytexture.loadFromFile("Arrow.png");
-	mysprite.setTexture(mytexture);
-	if (!(mysprite.getPosition().y >= winSize.y - mytexture.getSize().y) && !isHit) {
-		if (-atan(cst_veloc.x / cst_veloc.y) * 180 / M_PI < 0)
-			mysprite.setRotation(90 + (90 - atan(cst_veloc.x / cst_veloc.y) * 180 / M_PI));
+	timeOfRun = (myClock.getElapsedTime() - momentZero);
+	if (!(mysprite.getPosition().y >= myWindow.getSize().y - mytexture->getSize().y) && !isHit) {
+		if (-atan(arrowVelocity.x / arrowVelocity.y) * 180 / M_PI < 0)
+			mysprite.setRotation(90 + (90 - atan(arrowVelocity.x / arrowVelocity.y) * 180 / M_PI));
 		else
-			mysprite.setRotation(-atan(cst_veloc.x / cst_veloc.y) * 180 / M_PI);
-		if (cst_veloc.x < 0)
+			mysprite.setRotation(-atan(arrowVelocity.x / arrowVelocity.y) * 180 / M_PI);
+		if (arrowVelocity.x < 0)
 			mysprite.rotate(180);
 
-		mysprite.move(cst_veloc);
-		view1.move(cst_veloc);
-		cst_veloc.y += 0.035;
-	}
-	else
-		isHit = true;
-}
+		mysprite.move(arrowVelocity);
+		//view1.move(arrowVelocity);
+		view1.setCenter(mysprite.getPosition());
+		double gravity = 9.81;
 
-void Arrow::hitting()
-{
-	isHit = true;
+		if (myWind.myuseWind) {
+			arrowVelocity.y = myWind.v2iwind.y + velocityZero.y + gravity * (timeOfRun.asSeconds()); // V= wiatr + v0 - g*t
+			arrowVelocity.x = myWind.v2iwind.x + velocityZero.x; // Vx+ wiatr
+		}										 //double gravity = 0.15;
+		else {
+			arrowVelocity.y = velocityZero.y + gravity * (timeOfRun.asSeconds());
+			//arrowVelocity.x = velocityZero.x;
+		}
+	}
+	else {
+		isHit = true;
+
+	}
 }
 
 bool Arrow::isInterecting(Player& player)

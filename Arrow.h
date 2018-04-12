@@ -1,24 +1,33 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "Player.h"
+#include "Wind.h"
 
 class Arrow : public sf::Drawable
 {
 public:
-	Arrow() = delete;
-	Arrow(sf::Vector2i mouseP, sf::Vector2i mouse, sf::Vector2f poczatek, sf::Vector2u winSize);///zmieni³em argumenty na wektroy zeby by³o ³atwiej mouseP - poczatek mouse- koniec, wektor poczatek to wektor z ktorego strzala ma wylatwyac na razie da³em ze jest to getPosition obiektu gracz
+	friend class DeadArrow;
+	friend class Wind;
+	friend class SinglePlayer;
+	Arrow() = default;
+	//Arrow() = delete;
+	Arrow(sf::Vector2i mouseP, sf::Vector2i mouse, sf::Vector2f poczatek, sf::RenderWindow& myWindow, sf::Clock myClock);
 	~Arrow() = default;
-	void update(sf::Vector2u winSize,sf::View& view1);
-	bool isInterecting(Player& player);///funkcja przeniesiona z maina do klasy
+	void update(sf::RenderWindow& myWindow, sf::View& view1, sf::Clock myClock,Wind myWind);
+	bool isInterecting(Player& player);//funkcja sprawdzajaca zywej strzaly z graczem podanym jako argument
 	bool isHit;
-	void hitting();
+	bool isDead;
+	sf::Vector2f arrowVelocity;
 private:
-	sf::Texture mytexture;
+	sf::Time timeOfRun;
+	sf::Vector2f velocityZero;
+	sf::Time momentZero;
+	sf::Texture* mytexture = new sf::Texture;
 	sf::Sprite mysprite;
-	//sf::RectangleShape rect;///dzieki przeniesieniu rect jest znowu prywatne
-	sf::Vector2f cst_veloc;
+	//sf::Vector2f arrowVelocity;
 	void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 };
 
