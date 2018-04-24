@@ -15,7 +15,6 @@ public class Main {
         myWindow.setFramerateLimit(60);
         Menu myMenu=new MainMenu(myWindow);
         Background myBackground = new Background(myWindow);
-        //Menu myMenu=new Options(myWindow);
 
         while(myWindow.isOpen()){
             for(Event event : myWindow.pollEvents()) {
