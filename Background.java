@@ -21,11 +21,11 @@ public class Background {
         tabSprite=new Vector<Sprite>();
 
         forestTexture=new Texture();
-        forestTexture.loadFromFile(Paths.get("forest.jpg"));
+        forestTexture.loadFromFile(Paths.get("textures/forest.jpg"));
         skyTexture=new Texture();
-        skyTexture.loadFromFile(Paths.get("sky.jpg"));
+        skyTexture.loadFromFile(Paths.get("textures/sky.jpg"));
         grassTexture=new Texture();
-        grassTexture.loadFromFile(Paths.get("grass.jpg"));
+        grassTexture.loadFromFile(Paths.get("textures/grass.jpg"));
 
         for (int i = 0; i < 13; i++, spriteTabIterator++)
         {

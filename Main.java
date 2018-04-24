@@ -21,7 +21,6 @@ public class Main {
             for(Event event : myWindow.pollEvents()) {
                 myMenu=myMenu.Listening( myWindow,myMenu);
             }
-
             myWindow.clear();
             myBackground.displayBackground(myWindow);
             myMenu.Display(myWindow);
