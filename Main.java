@@ -14,6 +14,7 @@ public class Main {
         RenderWindow myWindow = new RenderWindow(new VideoMode(1920,1080),"ArchersJ");
         myWindow.setFramerateLimit(60);
         Menu myMenu=new MainMenu(myWindow);
+        Background myBackground = new Background(myWindow);
         //Menu myMenu=new Options(myWindow);
 
         while(myWindow.isOpen()){
@@ -22,6 +23,7 @@ public class Main {
             }
 
             myWindow.clear();
+            myBackground.displayBackground(myWindow);
             myMenu.Display(myWindow);
             myWindow.display();
         }
