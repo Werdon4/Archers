@@ -11,7 +11,7 @@ import org.jsfml.window.event.Event;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class Options extends Menu {
+public class Options extends Menu  {
     private static final int NUMBER_OF_OPTIONS_ITEMS = 9;
     int dificultyLevelIndex;
     Text[] optionTexts=new Text[NUMBER_OF_OPTIONS_ITEMS];
@@ -66,7 +66,7 @@ public class Options extends Menu {
             optionTexts[selectedItemIndex].setColor(Color.RED);
         }
     }
-    public Menu Listening(RenderWindow myWindow,Menu myMenu) throws IOException {
+    public Menu Listening(RenderWindow myWindow) throws IOException {
         if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)){
             myWindow.close();
         }
@@ -77,6 +77,7 @@ public class Options extends Menu {
             this.MoveDown();
         }
         if(Keyboard.isKeyPressed(Keyboard.Key.RETURN)){
+            MenuFactory myMenus=new MenuFactory();
             switch (selectedItemIndex){
                 case 0:
                 {
@@ -95,10 +96,9 @@ public class Options extends Menu {
                 }
                 case 3:
                     System.out.println("Powrot");
-                    myMenu=new MainMenu(myWindow);
-                    return myMenu;
+                    return myMenus.createMenus(Menus.POWROT,myWindow);
             }
         }
-        return myMenu;
+        return this;
     }
 }

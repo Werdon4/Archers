@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 
 
-public class MainMenu extends Menu {
+public class MainMenu extends Menu  {
 
     private static final int NUMBER_OF_MENU_ITEMS = 4;
     Text[] menuTexts=new Text[NUMBER_OF_MENU_ITEMS];
@@ -46,7 +46,8 @@ public class MainMenu extends Menu {
         }
     }
 
-    public Menu Listening( RenderWindow myWindow,Menu myMenu) throws IOException {
+    public Menu Listening( RenderWindow myWindow) throws IOException {
+
         if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)){
                 myWindow.close();
         }
@@ -57,6 +58,7 @@ public class MainMenu extends Menu {
             this.MoveDown();
         }
         if(Keyboard.isKeyPressed(Keyboard.Key.RETURN)){
+            MenuFactory myMenus=new MenuFactory();
             switch (selectedItemIndex){
                 case 0:
                 {
@@ -71,8 +73,8 @@ public class MainMenu extends Menu {
                 case 2:
                 {
                     System.out.println("Ustawienia");
-                    myMenu=new Options(myWindow);
-                    return myMenu;
+                    myMenus.createMenus(Menus.OPCJE,myWindow);
+                    return new Options(myWindow);
                     //break;
                 }
                 case 3:
@@ -80,7 +82,7 @@ public class MainMenu extends Menu {
                     break;
             }
         }
-        return myMenu;
+        return this;
     }
 
     public void MoveUp(){

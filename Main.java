@@ -18,7 +18,8 @@ public class Main {
 
         while(myWindow.isOpen()){
             for(Event event : myWindow.pollEvents()) {
-                myMenu=myMenu.Listening( myWindow,myMenu);
+                myMenu=myMenu.Listening( myWindow);
+
             }
             myWindow.clear();
             myBackground.displayBackground(myWindow);
