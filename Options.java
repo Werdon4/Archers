@@ -6,7 +6,6 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Text;
 import org.jsfml.system.Vector2f;
 import org.jsfml.window.Keyboard;
-import org.jsfml.window.event.Event;
 
 import java.io.IOException;
 import java.nio.file.Paths;

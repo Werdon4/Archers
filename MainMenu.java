@@ -1,11 +1,7 @@
 package pl.ArcherJ.Main;
-import org.jsfml.audio.Music;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
 import org.jsfml.window.Keyboard;
-import org.jsfml.window.event.Event;
-import org.jsfml.window.VideoMode;
-import org.jsfml.system.*;
 
 import java.io.IOException;
 import java.nio.file.Paths;
